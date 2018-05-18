@@ -1119,14 +1119,14 @@ static int lfs_ctz_find(lfs_t *lfs,
                 lfs_npw2(current-target+1) - 1,
                 lfs_ctz(current));
 
-        int err = lfs_cache_read(lfs, rcache, pcache, head, 4*skip, &head, 4);
+        int err = lfs_cache_read(lfs, rcache, pcache, head, 0, &head, 4);
         head = lfs_fromle32(head);
         if (err) {
             return err;
         }
 
         LFS_ASSERT(head >= 2 && head <= lfs->cfg->block_count);
-        current -= 1 << skip;
+        current -= 1;
     }
 
     *block = head;
